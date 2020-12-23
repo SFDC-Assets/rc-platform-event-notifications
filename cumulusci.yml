@@ -1,0 +1,25 @@
+minimum_cumulusci_version: '3.23.0'
+project:
+    name: sfdx-platform-event-notifications
+    package:
+        name: sfdx-platform-event-notifications
+        api_version: '50.0'
+    git:
+        default_branch: 'main'
+    source_format: sfdx
+
+tasks:
+    robot:
+        options:
+            suites: robot/sfdx-platform-event-notifications/tests
+            options:
+                outputdir: robot/sfdx-platform-event-notifications/results
+
+    robot_testdoc:
+        options:
+            path: robot/sfdx-platform-event-notifications/tests
+            output: robot/sfdx-platform-event-notifications/doc/sfdx-platform-event-notifications_tests.html
+
+    run_tests:
+        options:
+            required_org_code_coverage_percent: 75
