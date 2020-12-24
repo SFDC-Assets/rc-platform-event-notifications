@@ -148,9 +148,9 @@
         <label>Business Event</label>
         <locationX>176</locationX>
         <locationY>158</locationY>
-        <allowBack>true</allowBack>
+        <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
-        <allowPause>true</allowPause>
+        <allowPause>false</allowPause>
         <connector>
             <targetReference>Create_Business_Event</targetReference>
         </connector>
@@ -342,9 +342,9 @@
         <label>Event Published</label>
         <locationX>176</locationX>
         <locationY>398</locationY>
-        <allowBack>true</allowBack>
+        <allowBack>false</allowBack>
         <allowFinish>true</allowFinish>
-        <allowPause>true</allowPause>
+        <allowPause>false</allowPause>
         <fields>
             <name>published_text</name>
             <fieldText>&lt;p&gt;&lt;b style=&quot;font-size: 14px;&quot;&gt;Event Published&lt;/b&gt;&lt;/p&gt;</fieldText>

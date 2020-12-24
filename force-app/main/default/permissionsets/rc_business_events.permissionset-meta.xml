@@ -15,4 +15,8 @@
         <object>Business_Event__e</object>
         <viewAllRecords>false</viewAllRecords>
     </objectPermissions>
+    <tabSettings>
+        <tab>Test_Business_Events</tab>
+        <visibility>Visible</visibility>
+    </tabSettings>
 </PermissionSet>
