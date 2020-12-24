@@ -7,7 +7,6 @@ project:
     git:
         default_branch: 'main'
     source_format: sfdx
-
 tasks:
     robot:
         options:

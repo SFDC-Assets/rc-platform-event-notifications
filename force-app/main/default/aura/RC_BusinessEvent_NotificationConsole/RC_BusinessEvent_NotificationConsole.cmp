@@ -1,0 +1,86 @@
+<aura:component description="RC_BusinessEvent_NotificationConsole" implements="flexipage:availableForAllPageTypes" access="global" > 
+
+    <aura:attribute name="notifications" type="List"/>
+    <aura:attribute name="isMuted" type="Boolean" default="false"/>
+
+    <!-- handlers -->
+    <aura:handler name="init" value="{!this}" action="{!c.init}"/>
+
+    <lightning:empApi aura:id="empApi"/>
+    <aura:attribute name="channel" type="String" default="/event/Business_Event__e"/>
+    <aura:attribute name="subscription" type="Map"/>
+    <aura:attribute name="theCase" type="Case"/>
+
+    <!-- events -->
+    <aura:registerEvent name="toastEvent" type="force:showToast"/>
+
+    <div>
+        
+        <lightning:card title="Business Events" class="slds-p-around_medium">
+            
+        <!-- Header -->
+        <div class="slds-p-around_x-small slds-border_bottom slds-theme_shade">
+            <div class="slds-grid slds-grid_align-spread slds-grid_vertical-align-center">
+                <div>
+                    <span class="slds-badge">{!v.notifications.length}</span>
+                </div>
+                <div>
+                    <lightning:buttonIcon onclick="{!c.onClear}" iconName="utility:delete" title="Clear Notifications"
+                                          alternativeText="Clear Notifications" variant="border-filled"/>
+                    <lightning:buttonIcon onclick="{!c.onToggleMute}"
+                                          iconName="{!v.isMuted ? 'utility:volume_off' : 'utility:volume_high'}"
+                                          title="{!v.isMuted ? 'Unmute Notifications' : 'Mute Notifications'}"
+                                          alternativeText="Toggle Mute" variant="border-filled"/>
+                </div>
+            </div>
+        </div>
+
+        <!-- Notification list -->
+        <div class="slds-container_fluid slds-scrollable_y content">
+            <aura:iteration items="{!v.notifications}" var="notification">
+                <div class="slds-p-around_small slds-border_top">
+                    <div class="slds-grid slds-has-flexi-truncate slds-gutters" >
+                        <div>
+                            <aura:if isTrue="{!notification.type == 'info'}">
+                            	<lightning:icon iconName="utility:info_alt" alternativeText="Info" size="x-small"/>
+                        	</aura:if>
+                            <aura:if isTrue="{!notification.type == 'error'}">
+                            	<lightning:icon iconName="utility:error" alternativeText="Error" size="x-small" class="slds-icon-text-error"/>
+                        	</aura:if>
+                        </div>
+                        <div class="slds-col slds-size_4-of-6 slds-text-align--left slds-col_bump-right" >
+                            <aura:if isTrue="{!notification.action == 'message'}">
+                            	<p>{!notification.name}</p>
+                                <p>Origin: {!notification.origin}</p>
+                            </aura:if>
+                            
+                            <aura:if isTrue="{!notification.action == 'record_link'}">
+                            	<p>{!notification.name}</p>
+                                <p>Origin: {!notification.origin}</p>
+                                <p>{!notification.recordFieldLabel}: <a href="" id='{!notification.recordId}' onclick="{!c.navigateToRecordFromLink}">{!notification.recordFieldValue}</a></p>
+                            </aura:if>
+                            
+                            <aura:if isTrue="{!notification.action == 'flow'}">
+                                <p>{!notification.name}</p>
+                                
+                                <p><c:RC_FlowButton buttonLabel="{!notification.flowButtonLabel}" variant="BRAND" 
+                                        flowToLaunch="{!notification.flowApiName}" showFlowInModal="true"
+                                        recordId="{!notification.recordId}"
+                                    />
+                                </p>
+                                
+                            </aura:if>
+                            
+                        </div>
+                        <div class="slds-text-color_weak slds-p-left_x-small">
+                            {!notification.time}
+                        </div>
+                    </div>
+                </div>
+            </aura:iteration>
+        </div>
+
+        </lightning:card>
+    </div>
+
+</aura:component>
