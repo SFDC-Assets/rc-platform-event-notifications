@@ -355,7 +355,7 @@
             <name>event_Record_ID</name>
             <dataType>String</dataType>
             <defaultValue>
-                <stringValue>00Q21000007iiL2EAI</stringValue>
+                <elementReference>default_RecordId</elementReference>
             </defaultValue>
             <fieldText>Record ID</fieldText>
             <fieldType>InputField</fieldType>
@@ -382,7 +382,7 @@
             <name>event_Record_Field_Label</name>
             <dataType>String</dataType>
             <defaultValue>
-                <stringValue>Name</stringValue>
+                <elementReference>default_RecordFieldLabel</elementReference>
             </defaultValue>
             <fieldText>Record Field Label</fieldText>
             <fieldType>InputField</fieldType>
@@ -402,7 +402,7 @@
             <name>event_Record_Field_Value</name>
             <dataType>String</dataType>
             <defaultValue>
-                <stringValue>Ryan Cox</stringValue>
+                <elementReference>default_RecordFieldValue</elementReference>
             </defaultValue>
             <fieldText>Record Field Value</fieldText>
             <fieldType>InputField</fieldType>
@@ -422,7 +422,7 @@
             <name>event_Flow_API_Name</name>
             <dataType>String</dataType>
             <defaultValue>
-                <stringValue>BE_View_Lead</stringValue>
+                <elementReference>default_Flow_API_Name</elementReference>
             </defaultValue>
             <fieldText>Flow API Name</fieldText>
             <fieldType>InputField</fieldType>
@@ -442,7 +442,7 @@
             <name>event_Flow_Button_Label</name>
             <dataType>String</dataType>
             <defaultValue>
-                <stringValue>View Lead: Ryan Cox</stringValue>
+                <elementReference>default_FlowButtonLabel</elementReference>
             </defaultValue>
             <fieldText>Flow Button Label</fieldText>
             <fieldType>InputField</fieldType>
@@ -469,4 +469,54 @@
         </connector>
     </start>
     <status>Active</status>
+    <variables>
+        <name>default_Flow_API_Name</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+        <value>
+            <stringValue>BE_View_Lead</stringValue>
+        </value>
+    </variables>
+    <variables>
+        <name>default_FlowButtonLabel</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+        <value>
+            <stringValue>View Hanna Moore</stringValue>
+        </value>
+    </variables>
+    <variables>
+        <name>default_RecordFieldLabel</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+        <value>
+            <stringValue>Name</stringValue>
+        </value>
+    </variables>
+    <variables>
+        <name>default_RecordFieldValue</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+        <value>
+            <stringValue>Hanna Moore</stringValue>
+        </value>
+    </variables>
+    <variables>
+        <name>default_RecordId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+        <value>
+            <stringValue>00Q1100000E5iP4EAJ</stringValue>
+        </value>
+    </variables>
 </Flow>

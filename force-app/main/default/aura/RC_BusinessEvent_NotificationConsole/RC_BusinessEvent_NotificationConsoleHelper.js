@@ -65,7 +65,7 @@
         
         // show toast
         var numPastEventsToReplay = component.get("v.numPastEventsToReplay");
-        helper.displayToast(component, 'success', 'Replayed ' + numPastEventsToReplayReady + ' past notifications.');
+        helper.displayToast(component, 'success', 'Replayed ' + numPastEventsToReplay + ' past notifications.');
     },
 
     // unsubscribe from the platform event channel

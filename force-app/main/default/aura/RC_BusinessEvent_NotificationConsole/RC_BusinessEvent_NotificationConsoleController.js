@@ -19,7 +19,10 @@
         // register empApi error listener and pass in the error handler function.
         empApi.onError($A.getCallback(errorHandler));
         helper.subscribe(component, event, helper);
-        helper.displayToast(component, 'success', 'Ready to receive notifications.');
+        
+        // show toast
+        var title = component.get('v.title');
+        helper.displayToast(component, 'success', title + ' ready to receive notifications');
     },
 
     // clear notifications
