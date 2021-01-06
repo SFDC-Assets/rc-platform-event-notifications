@@ -64,8 +64,8 @@
         component.set("v.isLoading", false);
         
         // show toast
-        //var numPastEventsToReplay = component.get("v.numPastEventsToReplay");
-        //helper.displayToast(component, 'success', 'Replayed ' + numPastEventsToReplayReady + ' past notifications.');
+        var numPastEventsToReplay = component.get("v.numPastEventsToReplay");
+        helper.displayToast(component, 'success', 'Replayed ' + numPastEventsToReplayReady + ' past notifications.');
     },
 
     // unsubscribe from the platform event channel
