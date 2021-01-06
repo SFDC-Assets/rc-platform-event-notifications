@@ -40,10 +40,34 @@
     },
     
     // replay previous events - unsubscribe and resubscribe to replay previous events
-    onReplay: function (component, event, helper) {
+    onReplay: function (component, event, helper) {        
+        // show spinner
+        component.set("v.isLoading", true);
+
+        // clear notifications
         component.set('v.notifications', []);
+        
+        // unsubscribe
+        console.log(helper.controllerFile() + ' > onReplay - unsubscribe');
         helper.unsubscribe(component, event, helper);
-        helper.subscribe_replay(component, event, helper);
+        
+        // get replayId
+        helper.getReplayId(component)
+            .then(() => {
+                // promise resolved
+                
+                // subscribe w/ replayId
+                var replayId = component.get("v.replayId");
+                console.log(helper.controllerFile() + ' > onReplay - subscribe with replayId: ' + replayId);
+                helper.subscribe_replay(component, event, helper);
+            })
+            .catch(err => {
+                // promise rejected
+                console.error(helper.controllerFile() + ' > onReplay - error: ' + err.message);
+                
+                // show error message
+                //component.set("v.errorMessage", err.message);
+            })        
     },
 
     navigateToRecord : function(component, event, helper) {

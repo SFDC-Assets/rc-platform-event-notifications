@@ -1,3 +1,4 @@
 <design:component>
 	<design:attribute name="title" label="Title" default="Business Events" />
+    <design:attribute name="numPastEventsToReplay" label="Number of Past Events for Replay button" default="4" />
 </design:component>

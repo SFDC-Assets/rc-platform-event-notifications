@@ -11,6 +11,7 @@
     <label>Business Events</label>
     <navType>Standard</navType>
     <tabs>Test_Business_Events</tabs>
+    <tabs>RC_Business_Event__c</tabs>
     <tabs>standard-Lead</tabs>
     <tabs>standard-Account</tabs>
     <tabs>standard-Opportunity</tabs>

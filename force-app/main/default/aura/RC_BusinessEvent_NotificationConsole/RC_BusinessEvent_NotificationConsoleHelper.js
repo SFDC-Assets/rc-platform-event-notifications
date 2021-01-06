@@ -44,7 +44,7 @@
         const channel = component.get('v.channel');
 
         // subscription option to get only new events.
-        const replayId = -1;
+        const replayId = component.get("v.replayId");
 
         // callback function to be passed in the subscribe call.
         // when an event is received, this callback prints the event event message to the component.
@@ -54,11 +54,18 @@
         };
 
         // Subscribe to the channel and save the returned subscription object.
-        console.log(helper.helperFile() + ' > subscribing to channel: ' + channel);
+        console.log(helper.helperFile() + ' > subscribing to channel: ' + channel + ', replayId: ' + replayId);
         empApi.subscribe(channel, replayId, $A.getCallback(callback)).then($A.getCallback(function (newSubscription) {
             console.log(helper.helperFile() + ' > subscribed to channel: ' + channel);
           	component.set('v.subscription', newSubscription);
         }));
+        
+        // hide spinner
+        component.set("v.isLoading", false);
+        
+        // show toast
+        //var numPastEventsToReplay = component.get("v.numPastEventsToReplay");
+        //helper.displayToast(component, 'success', 'Replayed ' + numPastEventsToReplayReady + ' past notifications.');
     },
 
     // unsubscribe from the platform event channel
@@ -89,8 +96,8 @@
         var notification = {};
         notification.time = $A.localizationService.formatDateTime(payload.CreatedDate, 'HH:mm');
         notification.replayId = message.data.event.replayId;
-        notification.type = payload.Type__c;
-        notification.name = payload.Event_Name__c;
+        notification.eventType = payload.Type__c;
+        notification.eventName = payload.Event_Name__c;
         notification.origin = payload.Origin__c;
         notification.action = payload.Action__c;
         notification.linkLabel = payload.Link_Label__c;
@@ -101,21 +108,24 @@
         notification.recordFieldValue = payload.Record_Field_Value__c;
         notification.flowApiName = payload.Flow_API_Name__c;
         notification.flowButtonLabel = payload.Flow_Button_Label__c;
-        notification.toastMessage = notification.name;        
+        notification.toastMessage = notification.eventName;        
         console.log(this.helperFile() + ' > notification: ' + JSON.stringify(notification));
-    
+
+        // display notification in a toast
+        this.displayToast(component, notification.eventType, notification.toastMessage);
+
         // save notification in history
         const notifications = component.get('v.notifications');
         notifications.push(notification);
         component.set('v.notifications', notifications);
-        
-        // display notification in a toast
-        var toastMessage = notification.toastMessage;
-        this.displayToast(component, notification.type, toastMessage);                                                    
+                
+        // store event in custom object
+        this.storeBusinessEvent(component, notification);
     },
 
     // displays a toast message.
     displayToast: function (component, type, message) {
+        console.log(this.helperFile() + ' > displayToast - type: ' + type + ', message: ' + message);
         const toastEvent = $A.get('e.force:showToast');
         toastEvent.setParams({
           type: type,
@@ -139,5 +149,97 @@
         }
         
    	}, // end navigateToRecord 
-   
+    
+    storeBusinessEvent: function(component, notification) {
+
+        return new Promise((resolve, reject) => {
+
+            console.log(this.helperFile() + ' > storeBusinessEvent - notification: ' + notification);
+
+            // Create the action
+            var doAction = true;
+            var action = component.get("c.storeBusinessEvent"); // method on the RC_BusinessEventController
+			if (notification != null) {
+                action.setParams({
+                    "event": notification
+                });
+            } else {
+                // no input parameters
+                doAction = false;
+            }
+ 
+            if (doAction) {
+                console.log(this.helperFile() + ' > storeBusinessEvent - params: ' + JSON.stringify(action.getParams()));
+
+                // Add callback behavior for when response is received
+                action.setCallback(this, function(response) {
+                    console.log(this.helperFile() + ' > storeBusinessEvent - response: ' + response.getState())
+                    var state = response.getState();
+                    if (state === "SUCCESS") {
+                        // no op                      
+                    }
+                    else {
+                        console.log(this.helperFile() + ' > storeBusinessEvent - failed with state: ' + state);
+                        var error = new Error('storeBusinessEvent - failed with state: ' + state);
+                        reject(error);
+                    }
+
+                    // promise resolved
+                    resolve();
+                });
+
+                // Send action off to be executed
+                $A.enqueueAction(action);
+
+            } // end doAction
+
+        }) // end promise
+
+    }, // end storeBusinessEvent   
+
+    getReplayId: function(component) {
+
+        return new Promise((resolve, reject) => {
+
+            var numPastEventsToReplay = component.get("v.numPastEventsToReplay");
+            console.log(this.helperFile() + ' > getReplayId - numPastEventsToReplay: ' + numPastEventsToReplay);
+
+            // Create the action
+            var doAction = true;
+            var action = component.get("c.getReplayId"); // method on the RC_BusinessEventController
+            action.setParams({
+            	"numPastEvents": numPastEventsToReplay
+        	});
+ 
+            if (doAction) {
+                console.log(this.helperFile() + ' > getReplayId - params: ' + JSON.stringify(action.getParams()));
+
+                // Add callback behavior for when response is received
+                action.setCallback(this, function(response) {
+                    console.log(this.helperFile() + ' > getReplayId - response: ' + response.getState())
+                    var state = response.getState();
+                    if (state === "SUCCESS") {
+                        var replayId = response.getReturnValue();
+                    	console.log(this.helperFile() + ' > getReplayId - getReplayId - replayId: ' + replayId);
+                    	component.set("v.replayId", replayId);                   
+                    }
+                    else {
+                        console.log(this.helperFile() + ' > getReplayId - failed with state: ' + state);
+                        var error = new Error('getReplayId - failed with state: ' + state);
+                        reject(error);
+                    }
+
+                    // promise resolved
+                    resolve();
+                });
+
+                // Send action off to be executed
+                $A.enqueueAction(action);
+
+            } // end doAction
+
+        }) // end promise
+
+    }, // end getReplayId  
+        
 })
