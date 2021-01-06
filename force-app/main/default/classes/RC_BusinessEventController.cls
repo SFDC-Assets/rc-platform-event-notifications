@@ -1,4 +1,4 @@
-public class RC_BusinessEventController {
+public without sharing class RC_BusinessEventController {
 
     @AuraEnabled
     public static void storeBusinessEvent(BusinessEventDetails event) {
