@@ -7,14 +7,18 @@
 	height:calc(100% - 49px);
 }
 
-.THIS.relatedToButton  {
-    font-size: 10px;
-    padding-top: 1px;
-    padding-bottom: 1px;
-    padding-left: 2px;
-    padding-right: 2px;
+.THIS .title {
+	font-weight: bold;
 }
 
-.THIS.icon_red svg {
+.THIS .red svg {
     fill : red;
+}
+
+.THIS .orange svg {
+    fill : orange;
+}
+
+.THIS .green svg {
+    fill : green;
 }

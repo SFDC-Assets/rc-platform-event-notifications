@@ -2,15 +2,7 @@
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
     <apiVersion>50.0</apiVersion>
     <choices>
-        <name>choice_error</name>
-        <choiceText>error</choiceText>
-        <dataType>String</dataType>
-        <value>
-            <stringValue>error</stringValue>
-        </value>
-    </choices>
-    <choices>
-        <name>choice_flow</name>
+        <name>choice_action_flow</name>
         <choiceText>flow</choiceText>
         <dataType>String</dataType>
         <value>
@@ -18,15 +10,15 @@
         </value>
     </choices>
     <choices>
-        <name>choice_info</name>
-        <choiceText>info</choiceText>
+        <name>choice_action_link</name>
+        <choiceText>link</choiceText>
         <dataType>String</dataType>
         <value>
-            <stringValue>info</stringValue>
+            <stringValue>link</stringValue>
         </value>
     </choices>
     <choices>
-        <name>choice_message</name>
+        <name>choice_action_message</name>
         <choiceText>message</choiceText>
         <dataType>String</dataType>
         <value>
@@ -34,7 +26,7 @@
         </value>
     </choices>
     <choices>
-        <name>choice_record_link</name>
+        <name>choice_action_record_link</name>
         <choiceText>record_link</choiceText>
         <dataType>String</dataType>
         <value>
@@ -42,7 +34,39 @@
         </value>
     </choices>
     <choices>
-        <name>choice_success</name>
+        <name>choice_target_blank</name>
+        <choiceText>_blank (new window or tab)</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>_blank</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>choice_target_self</name>
+        <choiceText>_self (same window)</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>_self</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>choice_type_error</name>
+        <choiceText>error</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>error</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>choice_type_info</name>
+        <choiceText>info</choiceText>
+        <dataType>String</dataType>
+        <value>
+            <stringValue>info</stringValue>
+        </value>
+    </choices>
+    <choices>
+        <name>choice_type_success</name>
         <choiceText>success</choiceText>
         <dataType>String</dataType>
         <value>
@@ -50,7 +74,7 @@
         </value>
     </choices>
     <choices>
-        <name>choice_warning</name>
+        <name>choice_type_warning</name>
         <choiceText>warning</choiceText>
         <dataType>String</dataType>
         <value>
@@ -83,9 +107,6 @@
         <label>Create Business Event</label>
         <locationX>176</locationX>
         <locationY>278</locationY>
-        <connector>
-            <targetReference>screen_Event_Published</targetReference>
-        </connector>
         <inputAssignments>
             <field>Action__c</field>
             <value>
@@ -108,6 +129,24 @@
             <field>Flow_Button_Label__c</field>
             <value>
                 <elementReference>event_Flow_Button_Label</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Link_Label__c</field>
+            <value>
+                <elementReference>event_Link_Label</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Link_Target__c</field>
+            <value>
+                <elementReference>event_Link_Target</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Link_URL__c</field>
+            <value>
+                <elementReference>event_Link_URL.value</elementReference>
             </value>
         </inputAssignments>
         <inputAssignments>
@@ -156,12 +195,12 @@
         </connector>
         <fields>
             <name>event_Type</name>
-            <choiceReferences>choice_info</choiceReferences>
-            <choiceReferences>choice_error</choiceReferences>
-            <choiceReferences>choice_warning</choiceReferences>
-            <choiceReferences>choice_success</choiceReferences>
+            <choiceReferences>choice_type_info</choiceReferences>
+            <choiceReferences>choice_type_error</choiceReferences>
+            <choiceReferences>choice_type_warning</choiceReferences>
+            <choiceReferences>choice_type_success</choiceReferences>
             <dataType>String</dataType>
-            <defaultSelectedChoiceReference>choice_info</defaultSelectedChoiceReference>
+            <defaultSelectedChoiceReference>choice_type_info</defaultSelectedChoiceReference>
             <fieldText>Event Type</fieldText>
             <fieldType>DropdownBox</fieldType>
             <isRequired>true</isRequired>
@@ -188,17 +227,102 @@
         </fields>
         <fields>
             <name>event_Action</name>
-            <choiceReferences>choice_message</choiceReferences>
-            <choiceReferences>choice_record_link</choiceReferences>
-            <choiceReferences>choice_flow</choiceReferences>
+            <choiceReferences>choice_action_message</choiceReferences>
+            <choiceReferences>choice_action_link</choiceReferences>
+            <choiceReferences>choice_action_record_link</choiceReferences>
+            <choiceReferences>choice_action_flow</choiceReferences>
             <dataType>String</dataType>
-            <defaultSelectedChoiceReference>choice_message</defaultSelectedChoiceReference>
+            <defaultSelectedChoiceReference>choice_action_message</defaultSelectedChoiceReference>
             <fieldText>Action</fieldText>
             <fieldType>DropdownBox</fieldType>
             <isRequired>true</isRequired>
         </fields>
         <fields>
             <name>section_for_link</name>
+            <fieldText>&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;b style=&quot;font-size: 14px; background-color: rgb(255, 255, 255); color: rgb(62, 62, 60);&quot;&gt;Action = &apos;link&apos;&lt;/b&gt;&lt;/p&gt;</fieldText>
+            <fieldType>DisplayText</fieldType>
+            <visibilityRule>
+                <conditionLogic>and</conditionLogic>
+                <conditions>
+                    <leftValueReference>event_Action</leftValueReference>
+                    <operator>EqualTo</operator>
+                    <rightValue>
+                        <elementReference>choice_action_link</elementReference>
+                    </rightValue>
+                </conditions>
+            </visibilityRule>
+        </fields>
+        <fields>
+            <name>event_Link_Label</name>
+            <dataType>String</dataType>
+            <defaultValue>
+                <stringValue>Do Something</stringValue>
+            </defaultValue>
+            <fieldText>Link Label</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>false</isRequired>
+            <visibilityRule>
+                <conditionLogic>and</conditionLogic>
+                <conditions>
+                    <leftValueReference>event_Action</leftValueReference>
+                    <operator>EqualTo</operator>
+                    <rightValue>
+                        <elementReference>choice_action_link</elementReference>
+                    </rightValue>
+                </conditions>
+            </visibilityRule>
+        </fields>
+        <fields>
+            <name>event_Link_URL</name>
+            <extensionName>flowruntime:url</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>label</name>
+                <value>
+                    <stringValue>Link URL</stringValue>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>value</name>
+                <value>
+                    <stringValue>https://www.google.com/search?q=do+something</stringValue>
+                </value>
+            </inputParameters>
+            <isRequired>true</isRequired>
+            <storeOutputAutomatically>true</storeOutputAutomatically>
+            <visibilityRule>
+                <conditionLogic>and</conditionLogic>
+                <conditions>
+                    <leftValueReference>event_Action</leftValueReference>
+                    <operator>EqualTo</operator>
+                    <rightValue>
+                        <elementReference>choice_action_link</elementReference>
+                    </rightValue>
+                </conditions>
+            </visibilityRule>
+        </fields>
+        <fields>
+            <name>event_Link_Target</name>
+            <choiceReferences>choice_target_self</choiceReferences>
+            <choiceReferences>choice_target_blank</choiceReferences>
+            <dataType>String</dataType>
+            <defaultSelectedChoiceReference>choice_target_blank</defaultSelectedChoiceReference>
+            <fieldText>Link Target</fieldText>
+            <fieldType>DropdownBox</fieldType>
+            <isRequired>true</isRequired>
+            <visibilityRule>
+                <conditionLogic>and</conditionLogic>
+                <conditions>
+                    <leftValueReference>event_Action</leftValueReference>
+                    <operator>EqualTo</operator>
+                    <rightValue>
+                        <elementReference>choice_action_link</elementReference>
+                    </rightValue>
+                </conditions>
+            </visibilityRule>
+        </fields>
+        <fields>
+            <name>section_for_record_link</name>
             <fieldText>&lt;p&gt;&lt;br&gt;&lt;/p&gt;&lt;p&gt;&lt;b style=&quot;font-size: 14px;&quot;&gt;Action = &apos;record_link&apos;&lt;/b&gt;&lt;/p&gt;</fieldText>
             <fieldType>DisplayText</fieldType>
             <visibilityRule>
@@ -207,7 +331,7 @@
                     <leftValueReference>event_Action</leftValueReference>
                     <operator>EqualTo</operator>
                     <rightValue>
-                        <elementReference>choice_record_link</elementReference>
+                        <elementReference>choice_action_record_link</elementReference>
                     </rightValue>
                 </conditions>
             </visibilityRule>
@@ -222,7 +346,7 @@
                     <leftValueReference>event_Action</leftValueReference>
                     <operator>EqualTo</operator>
                     <rightValue>
-                        <elementReference>choice_flow</elementReference>
+                        <elementReference>choice_action_flow</elementReference>
                     </rightValue>
                 </conditions>
             </visibilityRule>
@@ -242,14 +366,14 @@
                     <leftValueReference>event_Action</leftValueReference>
                     <operator>EqualTo</operator>
                     <rightValue>
-                        <elementReference>choice_record_link</elementReference>
+                        <elementReference>choice_action_record_link</elementReference>
                     </rightValue>
                 </conditions>
                 <conditions>
                     <leftValueReference>event_Action</leftValueReference>
                     <operator>EqualTo</operator>
                     <rightValue>
-                        <elementReference>choice_flow</elementReference>
+                        <elementReference>choice_action_flow</elementReference>
                     </rightValue>
                 </conditions>
             </visibilityRule>
@@ -269,7 +393,7 @@
                     <leftValueReference>event_Action</leftValueReference>
                     <operator>EqualTo</operator>
                     <rightValue>
-                        <elementReference>choice_record_link</elementReference>
+                        <elementReference>choice_action_record_link</elementReference>
                     </rightValue>
                 </conditions>
             </visibilityRule>
@@ -289,7 +413,7 @@
                     <leftValueReference>event_Action</leftValueReference>
                     <operator>EqualTo</operator>
                     <rightValue>
-                        <elementReference>choice_record_link</elementReference>
+                        <elementReference>choice_action_record_link</elementReference>
                     </rightValue>
                 </conditions>
             </visibilityRule>
@@ -309,7 +433,7 @@
                     <leftValueReference>event_Action</leftValueReference>
                     <operator>EqualTo</operator>
                     <rightValue>
-                        <elementReference>choice_flow</elementReference>
+                        <elementReference>choice_action_flow</elementReference>
                     </rightValue>
                 </conditions>
             </visibilityRule>
@@ -329,26 +453,10 @@
                     <leftValueReference>event_Action</leftValueReference>
                     <operator>EqualTo</operator>
                     <rightValue>
-                        <elementReference>choice_flow</elementReference>
+                        <elementReference>choice_action_flow</elementReference>
                     </rightValue>
                 </conditions>
             </visibilityRule>
-        </fields>
-        <showFooter>true</showFooter>
-        <showHeader>true</showHeader>
-    </screens>
-    <screens>
-        <name>screen_Event_Published</name>
-        <label>Event Published</label>
-        <locationX>176</locationX>
-        <locationY>398</locationY>
-        <allowBack>false</allowBack>
-        <allowFinish>true</allowFinish>
-        <allowPause>false</allowPause>
-        <fields>
-            <name>published_text</name>
-            <fieldText>&lt;p&gt;&lt;b style=&quot;font-size: 14px;&quot;&gt;Event Published&lt;/b&gt;&lt;/p&gt;</fieldText>
-            <fieldType>DisplayText</fieldType>
         </fields>
         <showFooter>true</showFooter>
         <showHeader>true</showHeader>

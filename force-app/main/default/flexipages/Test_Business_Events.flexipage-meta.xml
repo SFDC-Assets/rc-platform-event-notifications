@@ -99,6 +99,10 @@
     <flexiPageRegions>
         <itemInstances>
             <componentInstance>
+                <componentInstanceProperties>
+                    <name>title</name>
+                    <value>Notification Hub</value>
+                </componentInstanceProperties>
                 <componentName>RC_BusinessEvent_NotificationConsole</componentName>
             </componentInstance>
         </itemInstances>

@@ -1,22 +1,29 @@
 <aura:component description="RC_BusinessEvent_NotificationConsole" implements="flexipage:availableForAllPageTypes" access="global" > 
 
-    <aura:attribute name="notifications" type="List"/>
-    <aura:attribute name="isMuted" type="Boolean" default="false"/>
-
+    <!-- input -->
+    <aura:attribute name="title" type="String" default="Business Events" />
+ 
+    <aura:attribute name="cardTitle" type="Aura.Component[]">
+        <div class="title">{! v.title }</div>
+    </aura:attribute>
+    
     <!-- handlers -->
     <aura:handler name="init" value="{!this}" action="{!c.init}"/>
 
+    <!-- platform event subscriber -->
     <lightning:empApi aura:id="empApi"/>
     <aura:attribute name="channel" type="String" default="/event/Business_Event__e"/>
     <aura:attribute name="subscription" type="Map"/>
-    <aura:attribute name="theCase" type="Case"/>
-
+    <aura:attribute name="isMuted" type="Boolean" default="false"/>
+    <aura:attribute name="notifications" type="List"/>
+ 
     <!-- events -->
     <aura:registerEvent name="toastEvent" type="force:showToast"/>
 
     <div>
         
-        <lightning:card title="Business Events" class="slds-p-around_medium">
+        <lightning:card class="slds-p-around_small">
+            <aura:set attribute="title">{!v.cardTitle}</aura:set>
             
         <!-- Header -->
         <div class="slds-p-around_x-small slds-border_bottom slds-theme_shade">
@@ -31,6 +38,8 @@
                                           iconName="{!v.isMuted ? 'utility:volume_off' : 'utility:volume_high'}"
                                           title="{!v.isMuted ? 'Unmute Notifications' : 'Mute Notifications'}"
                                           alternativeText="Toggle Mute" variant="border-filled"/>
+                    <lightning:buttonIcon onclick="{!c.onReplay}" iconName="utility:skip_back" title="Replay Past Notifications"
+                                          alternativeText="Replay Past Notifications" variant="border-filled"/>
                 </div>
             </div>
         </div>
@@ -45,13 +54,26 @@
                             	<lightning:icon iconName="utility:info_alt" alternativeText="Info" size="x-small"/>
                         	</aura:if>
                             <aura:if isTrue="{!notification.type == 'error'}">
-                            	<lightning:icon iconName="utility:error" alternativeText="Error" size="x-small" class="slds-icon-text-error"/>
+                            	<lightning:icon iconName="utility:error" alternativeText="Error" size="x-small" class="red"/>
+                            </aura:if>
+                            <aura:if isTrue="{!notification.type == 'warning'}">
+                            	<lightning:icon iconName="utility:warning" alternativeText="Warning" size="x-small" class="orange"/>
+                            </aura:if>
+                            <aura:if isTrue="{!notification.type == 'success'}">
+                            	<lightning:icon iconName="utility:success" alternativeText="Success" size="x-small" class="green"/>
                         	</aura:if>
                         </div>
+                        
                         <div class="slds-col slds-size_4-of-6 slds-text-align--left slds-col_bump-right" >
                             <aura:if isTrue="{!notification.action == 'message'}">
                             	<p>{!notification.name}</p>
                                 <p>Origin: {!notification.origin}</p>
+                            </aura:if>
+                            
+                            <aura:if isTrue="{!notification.action == 'link'}">
+                            	<p>{!notification.name}</p>
+                                <p>Origin: {!notification.origin}</p>
+                                <p><a href="{!notification.linkURL}" target="{!notification.linkTarget}">{!notification.linkLabel}</a></p>
                             </aura:if>
                             
                             <aura:if isTrue="{!notification.action == 'record_link'}">
