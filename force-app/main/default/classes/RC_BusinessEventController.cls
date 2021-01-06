@@ -42,7 +42,7 @@ public class RC_BusinessEventController {
             replayId = Integer.valueof(event.Name);
             replayId = (replayId - 1); // decrement 1 so the last replayId will be included in the replay
         }
-        System.debug('RC_BusinessEventController > getReplayId - events found: ' + events);
+        System.debug('RC_BusinessEventController > getReplayId - replayId: ' + replayId);
         return replayId;
         
     } // end getReplayId

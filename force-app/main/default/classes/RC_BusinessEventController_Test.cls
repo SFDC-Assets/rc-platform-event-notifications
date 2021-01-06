@@ -1,5 +1,41 @@
-public class RC_Publish_Sample_Business_Events {
+@isTest
+public class RC_BusinessEventController_Test {
 
+    @isTest static void test_businessEvents() {
+        
+        System.debug('RC_BusinessEventController_Test >> test_businessEvents > start');
+        
+        Test.startTest();
+        
+        Integer numEvents = 3;
+        for (Integer i = 0; i < numEvents; ++i) {
+                                     
+            RC_BusinessEventController.BusinessEventDetails e = new RC_BusinessEventController.BusinessEventDetails();
+            e.replayId = String.valueOf(i);
+            e.eventType = 'info';
+            e.eventName = 'New Lead Created';
+            e.origin = 'Partner';
+            e.action = 'message';
+            
+            RC_BusinessEventController.storeBusinessEvent(e);
+        }
+        
+        List<RC_Business_Event__c> events = [SELECT Id FROM RC_Business_Event__c];
+        System.assertEquals(numEvents, events.size());
+        
+        Integer numPastEvents = 2;
+        Integer replayId = RC_BusinessEventController.getReplayId(numPastEvents);
+        System.assertEquals(numPastEvents - 2, replayId);
+        
+        RC_BusinessEventController_Test.sampleEvents();
+        
+        Test.stopTest();
+        
+        System.debug('RC_BusinessEventController_Test >> test_businessEvents > complete');
+    }
+    
+    
+    
     static public void sampleEvents() {
         
         // publish platform events
@@ -43,7 +79,5 @@ public class RC_Publish_Sample_Business_Events {
         
         List<Database.SaveResult> results = EventBus.publish(events);
         System.debug('publish event results: ' + results);
-
-    }
-    
+    }    
 }
