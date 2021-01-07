@@ -124,6 +124,14 @@
         <layoutColumns/>
         <style>CustomLinks</style>
     </layoutSections>
+    <platformActionList>
+        <actionListContext>Record</actionListContext>
+        <platformActionListItems>
+            <actionName>RC_Business_Event__c.Replay_From_This_Event</actionName>
+            <actionType>QuickAction</actionType>
+            <sortOrder>0</sortOrder>
+        </platformActionListItems>
+    </platformActionList>
     <showEmailCheckbox>false</showEmailCheckbox>
     <showHighlightsPanel>false</showHighlightsPanel>
     <showInteractionLogPanel>false</showInteractionLogPanel>
