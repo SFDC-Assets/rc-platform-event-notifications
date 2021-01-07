@@ -116,7 +116,9 @@
 
         // save notification in history
         const notifications = component.get('v.notifications');
-        notifications.push(notification);
+        const notificationOrder = component.get("v.notificationOrder");
+        if (notificationOrder == 'ASC') notifications.push(notification); // add to end
+        else notifications.unshift(notification); // add to beginning
         component.set('v.notifications', notifications);
                 
         // store event in custom object

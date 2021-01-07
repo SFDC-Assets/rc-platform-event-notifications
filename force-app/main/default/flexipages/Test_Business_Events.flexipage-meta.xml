@@ -100,6 +100,10 @@
         <itemInstances>
             <componentInstance>
                 <componentInstanceProperties>
+                    <name>notificationOrder</name>
+                    <value>ASC</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
                     <name>numPastEventsToReplay</name>
                     <value>4</value>
                 </componentInstanceProperties>

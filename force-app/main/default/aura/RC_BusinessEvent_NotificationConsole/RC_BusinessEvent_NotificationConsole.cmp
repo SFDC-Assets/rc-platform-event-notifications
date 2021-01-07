@@ -2,6 +2,7 @@
 
     <!-- input -->
     <aura:attribute name="title" type="String" default="Business Events" />
+    <aura:attribute name="notificationOrder" type="String" default="ASC" description="ASC (ascending) = new notifications will be added to the bottom; DESC (descending) = new notifications will be on top" />
     <aura:attribute name="numPastEventsToReplay" type="Integer" default="4" />
      
     <!-- handlers -->
