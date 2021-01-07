@@ -108,11 +108,21 @@
         notification.recordFieldValue = payload.Record_Field_Value__c;
         notification.flowApiName = payload.Flow_API_Name__c;
         notification.flowButtonLabel = payload.Flow_Button_Label__c;
-        notification.toastMessage = notification.eventName;        
-        console.log(this.helperFile() + ' > notification: ' + JSON.stringify(notification));
+        console.log(this.helperFile() + ' > onReceiveNotification - notification: ' + JSON.stringify(notification));
 
         // display notification in a toast
-        this.displayToast(component, notification.eventType, notification.toastMessage);
+        var toastMessage = notification.eventName;
+        if (notification.action == 'message') {
+            this.displayToast(component, notification.eventType, toastMessage);
+        } else if (notification.action == 'link') {
+            var linkInfo = [];
+    		linkInfo.push({'label': notification.linkLabel, 'url': notification.linkURL});
+            this.displayToastLink(component, notification.eventType, toastMessage, linkInfo);
+        } else if (notification.action == 'record_link') {
+            var linkInfo = [];
+    		linkInfo.push({'label': notification.recordFieldValue, 'url': '/' + notification.recordId});
+            this.displayToastLink(component, notification.eventType, toastMessage, linkInfo);
+        } 
 
         // save notification in history
         const notifications = component.get('v.notifications');
@@ -127,11 +137,24 @@
 
     // displays a toast message.
     displayToast: function (component, type, message) {
-        console.log(this.helperFile() + ' > displayToast - type: ' + type + ', message: ' + message);
+        //console.log(this.helperFile() + ' > displayToast - type: ' + type + ', message: ' + message);
         const toastEvent = $A.get('e.force:showToast');
         toastEvent.setParams({
           type: type,
           message: message
+        });
+        toastEvent.fire();
+    },
+    
+    // displays a toast message with a link.
+    displayToastLink: function (component, type, message, linkInfo) {
+        //console.log(this.helperFile() + ' > displayToastLink - type: ' + type + ', message: ' + message + ', linkInfo: ' + JSON.stringify(linkInfo));
+        const toastEvent = $A.get('e.force:showToast');
+        toastEvent.setParams({
+          type: type,
+          message: 'not used',
+          messageTemplate: message + '\n\n{0}',
+          messageTemplateData: linkInfo
         });
         toastEvent.fire();
     },
@@ -156,7 +179,7 @@
 
         return new Promise((resolve, reject) => {
 
-            console.log(this.helperFile() + ' > storeBusinessEvent - notification: ' + notification);
+            console.log(this.helperFile() + ' > storeBusinessEvent - notification: ' + JSON.stringify(notification));
 
             // Create the action
             var doAction = true;

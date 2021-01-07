@@ -1,5 +1,7 @@
 <aura:component description="RC_BusinessEvent_NotificationConsole" implements="flexipage:availableForAllPageTypes" access="global" controller="RC_BusinessEventController" > 
-
+	<!--override Toast CSS with external [.CSS] file --> 
+    <ltng:require styles="{!$Resource.toast_multiline_css}" />
+    
     <!-- input -->
     <aura:attribute name="title" type="String" default="Business Events" />
     <aura:attribute name="notificationOrder" type="String" default="ASC" description="ASC (ascending) = new notifications will be added to the bottom; DESC (descending) = new notifications will be on top" />
