@@ -4,6 +4,14 @@
         <application>Business_Events</application>
         <visible>true</visible>
     </applicationVisibilities>
+    <classAccesses>
+        <apexClass>RC_BusinessEventController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>RC_BusinessEventController_Test</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
     <fieldPermissions>
         <editable>true</editable>
         <field>RC_Business_Event__c.Action__c</field>
