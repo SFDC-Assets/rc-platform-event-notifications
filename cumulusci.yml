@@ -7,6 +7,9 @@ project:
     git:
         default_branch: 'main'
     source_format: sfdx
+    dependencies:
+        - zip_url: https://github.com/SFDC-Assets/rc-flow-components/raw/master/archive/master.zip
+          unmanaged: True
 tasks:
     robot:
         options:
