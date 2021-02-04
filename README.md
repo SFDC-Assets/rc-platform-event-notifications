@@ -23,4 +23,12 @@ To work on this project in a scratch org:
 
 This project depends on the lightning component **RC_FlowButton** in https://github.com/SFDC-Assets/rc-flow-components
 
-If using CumulusCI to deploy this project, the dependent project will be deployed automatically as an unmanaged package. 
+If using CumulusCI to deploy this project, the dependent project will be deployed automatically as an unmanaged package before installing the source in this project. 
+
+If not using CumulusCI, first deploy the dependent project above using sfdx or the unmanaged package installation url in https://github.com/SFDC-Assets/rc-flow-components/blob/master/README.md. Then install with sfdx:
+
+1. `./scripts/authenticate-prod-org.sh`
+2. `./scripts/convert-to-metadata-api.sh`
+3. `./scripts/deploy-metadata-to-prod-check.sh`
+4. `./scripts/deploy-metadata-to-prod.sh`
+5. Assign the permission set named `business_events` to users.
