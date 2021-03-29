@@ -10,7 +10,7 @@
 ![Business Event Notification Console](docs/images/business-event-console.png)
 
 More detailed documentation in these: 
-- [Business Event Notification Console](docs/PlatformEventNotifications-component.pdf)
+- [Platform Event Notification Console](docs/PlatformEventNotifications-component.pdf)
 - [https://sfdc.co/rc-platform-event-notifications](https://sfdc.co/rc-platform-event-notifications)
 
 ## Development
