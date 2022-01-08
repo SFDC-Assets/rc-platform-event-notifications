@@ -69,6 +69,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>RC_Business_Event__c.Show_Toast__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>RC_Business_Event__c.Type__c</field>
         <readable>true</readable>
     </fieldPermissions>

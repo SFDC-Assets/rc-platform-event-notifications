@@ -20,6 +20,7 @@ public without sharing class RC_BusinessEventController {
             e.Record_Field_Label__c = event.recordFieldLabel;
             e.Record_Field_Value__c = event.recordFieldValue;
             e.Record_ID__c = event.recordId;
+            e.Show_Toast__c = event.showToast;
             e.Type__c = event.eventType;
             
             insert e;
@@ -40,7 +41,7 @@ public without sharing class RC_BusinessEventController {
         if (len > 0) {
             RC_Business_Event__c event = events.get(len-1);
             replayId = Integer.valueof(event.Name);
-            replayId = (replayId - 1); // decrement 1 so the last replayId will be included in the replay
+            replayId = (replayId);
         }
         System.debug('RC_BusinessEventController > getReplayId - replayId: ' + replayId);
         return replayId;
@@ -52,6 +53,9 @@ public without sharing class RC_BusinessEventController {
         
         @AuraEnabled
         public String replayId {get;set;}
+
+        @AuraEnabled
+        public Boolean showToast {get;set;}
         
         @AuraEnabled
         public String action {get;set;}

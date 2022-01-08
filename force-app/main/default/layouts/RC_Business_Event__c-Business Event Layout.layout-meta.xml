@@ -15,6 +15,10 @@
                 <behavior>Edit</behavior>
                 <field>Event_Name__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Show_Toast__c</field>
+            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>

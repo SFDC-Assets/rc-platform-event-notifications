@@ -3,7 +3,7 @@ project:
     name: sfdx-platform-event-notifications
     package:
         name: sfdx-platform-event-notifications
-        api_version: '50.0'
+        api_version: '53.0'
     git:
         default_branch: 'main'
     source_format: sfdx

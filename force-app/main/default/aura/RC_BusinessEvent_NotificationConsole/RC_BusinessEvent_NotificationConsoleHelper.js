@@ -99,6 +99,7 @@
         notification.eventType = payload.Type__c;
         notification.eventName = payload.Event_Name__c;
         notification.origin = payload.Origin__c;
+        notification.showToast = payload.Show_Toast__c;
         notification.action = payload.Action__c;
         notification.linkLabel = payload.Link_Label__c;
         notification.linkURL = payload.Link_URL__c;
@@ -110,19 +111,21 @@
         notification.flowButtonLabel = payload.Flow_Button_Label__c;
         console.log(this.helperFile() + ' > onReceiveNotification - notification: ' + JSON.stringify(notification));
 
-        // display notification in a toast
-        var toastMessage = notification.eventName;
-        if (notification.action == 'message') {
-            this.displayToast(component, notification.eventType, toastMessage);
-        } else if (notification.action == 'link') {
-            var linkInfo = [];
-    		linkInfo.push({'label': notification.linkLabel, 'url': notification.linkURL});
-            this.displayToastLink(component, notification.eventType, toastMessage, linkInfo);
-        } else if (notification.action == 'record_link') {
-            var linkInfo = [];
-    		linkInfo.push({'label': notification.recordFieldValue, 'url': '/' + notification.recordId});
-            this.displayToastLink(component, notification.eventType, toastMessage, linkInfo);
-        } 
+        // display notification in a toast, if indicated
+        if (notification.showToast) {
+            var toastMessage = notification.eventName;
+            if (notification.action == 'message') {
+                this.displayToast(component, notification.eventType, toastMessage);
+            } else if (notification.action == 'link') {
+                var linkInfo = [];
+                linkInfo.push({'label': notification.linkLabel, 'url': notification.linkURL});
+                this.displayToastLink(component, notification.eventType, toastMessage, linkInfo);
+            } else if (notification.action == 'record_link') {
+                var linkInfo = [];
+                linkInfo.push({'label': notification.recordFieldValue, 'url': '/' + notification.recordId});
+                this.displayToastLink(component, notification.eventType, toastMessage, linkInfo);
+            } 
+        }
 
         // save notification in history
         const notifications = component.get('v.notifications');

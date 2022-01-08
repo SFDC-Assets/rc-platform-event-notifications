@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
-    <apiVersion>50.0</apiVersion>
+    <apiVersion>52.0</apiVersion>
     <choices>
         <name>choice_action_flow</name>
         <choiceText>flow</choiceText>
@@ -174,6 +174,12 @@
             </value>
         </inputAssignments>
         <inputAssignments>
+            <field>Show_Toast__c</field>
+            <value>
+                <elementReference>event_Show_Toast</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
             <field>Type__c</field>
             <value>
                 <elementReference>event_Type</elementReference>
@@ -224,6 +230,16 @@
             <fieldText>Event Origin</fieldText>
             <fieldType>InputField</fieldType>
             <isRequired>false</isRequired>
+        </fields>
+        <fields>
+            <name>event_Show_Toast</name>
+            <dataType>Boolean</dataType>
+            <defaultValue>
+                <booleanValue>true</booleanValue>
+            </defaultValue>
+            <fieldText>Show Toast</fieldText>
+            <fieldType>InputField</fieldType>
+            <isRequired>true</isRequired>
         </fields>
         <fields>
             <name>event_Action</name>
