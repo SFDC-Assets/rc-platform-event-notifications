@@ -26,12 +26,22 @@ tasks:
         options:
             required_org_code_coverage_percent: 75
 
+    assign_perm_set:
+        description: Assign permission set 'rc_business_events' to the admin user
+        class_path: cumulusci.tasks.sfdx.SFDXOrgTask
+        options:
+            command: "force:user:permset:assign -n rc_business_events"
+
 flows:
-    config_qa:
-        steps:
-            3:
-                task: load_dataset
-    config_dev:
-        steps:
-            3:
-                task: load_dataset
+    config_dev:
+        steps:
+            3:
+                task: load_dataset
+            4:
+                task: assign_perm_set
+    config_qa:
+        steps:
+            3:
+                task: load_dataset
+            4:
+                task: assign_perm_set

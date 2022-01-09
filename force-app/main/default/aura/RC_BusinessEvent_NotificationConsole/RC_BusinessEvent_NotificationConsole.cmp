@@ -57,59 +57,9 @@
             <!-- Notification list -->
             <div class="slds-container_fluid slds-scrollable_y content">
                 <aura:iteration items="{!v.notifications}" var="notification">
-                    <div class="slds-p-around_small slds-border_top">
-                        <div class="slds-grid slds-has-flexi-truncate slds-gutters" >
-                            <div>
-                                <aura:if isTrue="{!notification.eventType == 'info'}">
-                                    <lightning:icon iconName="utility:info_alt" alternativeText="Info" size="x-small"/>
-                                </aura:if>
-                                <aura:if isTrue="{!notification.eventType == 'error'}">
-                                    <lightning:icon iconName="utility:error" alternativeText="Error" size="x-small" class="red"/>
-                                </aura:if>
-                                <aura:if isTrue="{!notification.eventType == 'warning'}">
-                                    <lightning:icon iconName="utility:warning" alternativeText="Warning" size="x-small" class="orange"/>
-                                </aura:if>
-                                <aura:if isTrue="{!notification.eventType == 'success'}">
-                                    <lightning:icon iconName="utility:success" alternativeText="Success" size="x-small" class="green"/>
-                                </aura:if>
-                                <!-- ({!notification.replayId}) -->
-                            </div>
-                            
-                            <div class="slds-col slds-size_4-of-6 slds-text-align--left slds-col_bump-right" >
-                                <aura:if isTrue="{!notification.action == 'message'}">
-                                    <p>{!notification.eventName}</p>
-                                    <p>Origin: {!notification.origin}</p>
-                                </aura:if>
-                                
-                                <aura:if isTrue="{!notification.action == 'link'}">
-                                    <p>{!notification.eventName}</p>
-                                    <p>Origin: {!notification.origin}</p>
-                                    <p><a href="{!notification.linkURL}" target="{!notification.linkTarget}">{!notification.linkLabel}</a></p>
-                                </aura:if>
-                                
-                                <aura:if isTrue="{!notification.action == 'record_link'}">
-                                    <p>{!notification.eventName}</p>
-                                    <p>Origin: {!notification.origin}</p>
-                                    <p>{!notification.recordFieldLabel}: <a href="" id='{!notification.recordId}' onclick="{!c.navigateToRecordFromLink}">{!notification.recordFieldValue}</a></p>
-                                </aura:if>
-                                
-                                <aura:if isTrue="{!notification.action == 'flow'}">
-                                    <p>{!notification.eventName}</p>
-                                    
-                                    <p><c:RC_FlowButton buttonLabel="{!notification.flowButtonLabel}" variant="BRAND" 
-                                            flowToLaunch="{!notification.flowApiName}" showFlowInModal="true"
-                                            recordId="{!notification.recordId}"
-                                        />
-                                    </p>
-                                    
-                                </aura:if>
-                                
-                            </div>
-                            <div class="slds-text-color_weak slds-p-left_x-small">
-                                {!notification.time}
-                            </div>
-                        </div>
-                    </div>
+                    
+                    <c:RC_BusinessEvent_Notification notification="{!notification}"/>
+                    
                 </aura:iteration>
             </div>
 

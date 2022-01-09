@@ -1,6 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <FlexiPage xmlns="http://soap.sforce.com/2006/04/metadata">
     <flexiPageRegions>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>eager</name>
+                    <type>decorator</type>
+                    <value>true</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>height</name>
+                    <type>decorator</type>
+                    <value>480</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>icon</name>
+                    <type>decorator</type>
+                    <value>fallback</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>label</name>
+                    <type>decorator</type>
+                    <value>Notification Console</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>notificationOrder</name>
+                    <value>DESC</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>numPastEventsToReplay</name>
+                    <value>4</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>scrollable</name>
+                    <type>decorator</type>
+                    <value>true</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>title</name>
+                    <value>Business Events</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>width</name>
+                    <type>decorator</type>
+                    <value>500</value>
+                </componentInstanceProperties>
+                <componentName>RC_BusinessEvent_NotificationConsole</componentName>
+            </componentInstance>
+        </itemInstances>
         <name>utilityItems</name>
         <type>Region</type>
     </flexiPageRegions>
