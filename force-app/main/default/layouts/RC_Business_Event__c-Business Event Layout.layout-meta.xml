@@ -139,7 +139,6 @@
     <relatedLists>
         <fields>NAME</fields>
         <fields>Name__c</fields>
-        <fields>Alias__c</fields>
         <fields>Username__c</fields>
         <relatedList>RC_Business_Event_Seen_By__c.Business_Event__c</relatedList>
     </relatedLists>
