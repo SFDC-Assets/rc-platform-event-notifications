@@ -1,4 +1,4 @@
-<aura:component description="RC_BusinessEvent_Notification" implements="flexipage:availableForAllPageTypes" access="global">
+<aura:component description="RC_BusinessEvent_Notification" implements="flexipage:availableForAllPageTypes" access="global" controller="RC_BusinessEventController">
 	
     <!-- input -->
     <aura:attribute name="notification" type="Object" default="Business Events" />
@@ -8,7 +8,7 @@
     
     <!-- private attributes -->
     <aura:attribute name="isSeen" type="Boolean" default="false"/>
-    <aura:attribute name="isSeenDate" type="String"/>
+    <aura:attribute name="seenDate" type="String"/>
     
     <!-- body -->
     
@@ -90,8 +90,8 @@
                             Seen
                         </div>
                         <div class="slds-col slds-text-align_left">
-                            {!v.isSeenDate}
-                            <!-- 1/8/22 12:00pm -->
+                            {!v.seenDate}
+                            <!-- 1/8/22 12:00 PM -->
                         </div>
                     </div>
                 </aura:if>

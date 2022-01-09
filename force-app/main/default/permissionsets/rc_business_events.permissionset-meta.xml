@@ -14,13 +14,23 @@
     </classAccesses>
     <fieldPermissions>
         <editable>true</editable>
-        <field>RC_Business_Event_Seen_By__c.Alias__c</field>
+        <field>RC_Business_Event_Seen_By__c.Name__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>RC_Business_Event_Seen_By__c.Name__c</field>
+        <field>RC_Business_Event_Seen_By__c.Seen_Date_In_User_Time__c</field>
         <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>RC_Business_Event_Seen_By__c.Seen_Date__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>RC_Business_Event_Seen_By__c.User_ID__c</field>
+        <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>

@@ -11,11 +11,14 @@
         var isChecked = component.find("isSeenCheckbox").get("v.checked");        
         console.log(helper.controllerFile() + ' > isSeenChanged - isChecked: ' + isChecked);
         
-        var now = new Date();
-        var isSeenDate = helper.formatDateString(now);
+        var seenDate = new Date();
+        var seenDateString = helper.formatDateString(seenDate);
         
 		component.set("v.isSeen", isChecked);
-        component.set("v.isSeenDate", isSeenDate);
+        component.set("v.seenDate", seenDateString);
+        
+        var notification = component.get('v.notification');
+        helper.storeBusinessEventSeenBy(component, notification.replayId, seenDate, seenDateString);
          
 	}, // end isSeenChanged
     

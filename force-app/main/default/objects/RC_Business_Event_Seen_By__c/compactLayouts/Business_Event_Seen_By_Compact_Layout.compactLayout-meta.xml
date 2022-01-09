@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CompactLayout xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Business_Event_Seen_By_Compact_Layout</fullName>
+    <fields>Business_Event__c</fields>
+    <fields>Name__c</fields>
+    <fields>Seen_Date_In_User_Time__c</fields>
+    <label>Business Event Seen By Compact Layout</label>
+</CompactLayout>

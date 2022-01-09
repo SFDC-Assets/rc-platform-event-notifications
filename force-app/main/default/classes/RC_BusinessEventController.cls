@@ -47,6 +47,32 @@ public without sharing class RC_BusinessEventController {
         return replayId;
         
     } // end getReplayId
+     
+    @AuraEnabled 
+    public static void storeBusinessEventSeenBy(BusinessEventSeenByDetails eventSeenBy) {
+        System.debug('RC_BusinessEventController > storeBusinessEventSeenBy: ' + eventSeenBy);
+      
+        List<RC_Business_Event__c> eList = [SELECT Id FROM RC_Business_Event__c WHERE Name = :eventSeenBy.replayId LIMIT 1];
+        if (eList.size() != 0) { 
+            RC_Business_Event__c e = eList.get(0);
+            
+            RC_Business_Event_Seen_By__c es = new RC_Business_Event_Seen_By__c();
+            es.Business_Event__c = e.Id;
+            es.Seen_Date__c = eventSeenBy.seenDate;
+            es.Seen_Date_In_User_Time__c = eventSeenBy.seenDateString;
+            es.User_Id__c = UserInfo.getUserId();
+            es.Username__c = UserInfo.getUserName();
+            es.Name__c = UserInfo.getName();
+       
+        	insert es;
+            System.debug('RC_BusinessEventController > storeBusinessEventSeenBy - inserted: ' + es);
+        }
+       
+    } // end storeBusinessEventSeenBy
+    
+    
+    
+    // ===== Inner Classes
     
     // BusinessEventDetails - inner class
     public class BusinessEventDetails {
@@ -93,5 +119,19 @@ public without sharing class RC_BusinessEventController {
         @AuraEnabled
         public String eventType {get;set;}
     }
+    
+    // BusinessEventSeenByDetails - inner class
+    public class BusinessEventSeenByDetails {
+        
+        @AuraEnabled
+        public String replayId {get;set;}
+
+        @AuraEnabled
+        public Date seenDate {get;set;}
+        
+        @AuraEnabled
+        public String seenDateString {get;set;}
+    }
+    
     
 } // end RC_BusinessEventController
