@@ -7,6 +7,7 @@ public class RC_BusinessEventController_Test {
         
         Test.startTest();
         
+        // test storeBusinessEvent
         Integer numEvents = 3;
         for (Integer i = 0; i < numEvents; ++i) {
                                      
@@ -21,9 +22,18 @@ public class RC_BusinessEventController_Test {
             RC_BusinessEventController.storeBusinessEvent(e);
         }
         
-        List<RC_Business_Event__c> events = [SELECT Id FROM RC_Business_Event__c];
+        List<RC_Business_Event__c> events = [SELECT Id, Name FROM RC_Business_Event__c];
         System.assertEquals(numEvents, events.size());
         
+        // test storeBusinessEventSeenBy
+        RC_BusinessEventController.BusinessEventSeenByDetails seenBy = new RC_BusinessEventController.BusinessEventSeenByDetails();
+        seenBy.replayId = events.get(0).Name;
+        seenBy.seenDate = System.today();
+        seenBy.seenDateString = '01/09/2022 10:04 PM';
+        
+        RC_BusinessEventController.storeBusinessEventSeenBy(seenBy);
+        
+        // test getReplayId
         Integer numPastEvents = 2;
         Integer replayId = RC_BusinessEventController.getReplayId(numPastEvents);
         System.assertEquals(numPastEvents - 1, replayId);
