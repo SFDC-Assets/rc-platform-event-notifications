@@ -32,6 +32,7 @@
                     <value>10</value>
                 </componentInstanceProperties>
                 <componentName>flexipage:filterListCard</componentName>
+                <identifier>flexipage_filterListCard</identifier>
             </componentInstance>
         </itemInstances>
         <name>region2</name>
@@ -91,6 +92,7 @@
                     <value>BRAND</value>
                 </componentInstanceProperties>
                 <componentName>RC_FlowButton</componentName>
+                <identifier>RC_FlowButton</identifier>
             </componentInstance>
         </itemInstances>
         <name>region3</name>
@@ -112,6 +114,7 @@
                     <value>Notification Hub</value>
                 </componentInstanceProperties>
                 <componentName>RC_BusinessEvent_NotificationConsole</componentName>
+                <identifier>RC_BusinessEvent_NotificationConsole</identifier>
             </componentInstance>
         </itemInstances>
         <name>region4</name>

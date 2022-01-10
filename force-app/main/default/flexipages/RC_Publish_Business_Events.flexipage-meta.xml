@@ -16,6 +16,7 @@
                     <value>&lt;p&gt;&lt;b style=&quot;font-size: 18px;&quot;&gt;Open the Notification Console from the Utility Bar below to test publishing and receiving Business Events. &lt;/b&gt;&lt;/p&gt;</value>
                 </componentInstanceProperties>
                 <componentName>flexipage:richText</componentName>
+                <identifier>flexipage_richText</identifier>
             </componentInstance>
         </itemInstances>
         <name>region2</name>
@@ -37,6 +38,7 @@
                     <value>Publish_Business_Event</value>
                 </componentInstanceProperties>
                 <componentName>flowruntime:interview</componentName>
+                <identifier>flowruntime_interview</identifier>
             </componentInstance>
         </itemInstances>
         <name>region3</name>

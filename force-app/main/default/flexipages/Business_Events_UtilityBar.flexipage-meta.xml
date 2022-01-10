@@ -46,6 +46,7 @@
                     <value>500</value>
                 </componentInstanceProperties>
                 <componentName>RC_BusinessEvent_NotificationConsole</componentName>
+                <identifier>RC_BusinessEvent_NotificationConsole</identifier>
             </componentInstance>
         </itemInstances>
         <name>utilityItems</name>
