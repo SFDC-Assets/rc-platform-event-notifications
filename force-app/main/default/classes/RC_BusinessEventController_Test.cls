@@ -16,6 +16,7 @@ public class RC_BusinessEventController_Test {
             e.eventName = 'New Lead Created';
             e.origin = 'Partner';
             e.action = 'message';
+            e.showToast = true;
             
             RC_BusinessEventController.storeBusinessEvent(e);
         }
@@ -25,7 +26,7 @@ public class RC_BusinessEventController_Test {
         
         Integer numPastEvents = 2;
         Integer replayId = RC_BusinessEventController.getReplayId(numPastEvents);
-        System.assertEquals(numPastEvents - 2, replayId);
+        System.assertEquals(numPastEvents - 1, replayId);
         
         RC_BusinessEventController_Test.sampleEvents();
         
@@ -46,6 +47,7 @@ public class RC_BusinessEventController_Test {
         e.Event_Name__c = 'New Lead Created';
         e.Origin__c = 'Partner';
         e.Action__c = 'message';
+        e.Show_Toast__c = true;
         events.add(e);
         
         Business_Event__e e2 = new Business_Event__e();
@@ -56,6 +58,7 @@ public class RC_BusinessEventController_Test {
         e2.Record_ID__c = '00Q21000007iiL2EAI';
         e2.Record_Field_Label__c = 'Lead';
         e2.Record_Field_Value__c = 'Ryan Cox';
+        e2.Show_Toast__c = true;
         events.add(e2);
         
         Business_Event__e e3 = new Business_Event__e();
@@ -63,6 +66,7 @@ public class RC_BusinessEventController_Test {
         e3.Event_Name__c = 'Something\'s not good';
         e3.Origin__c = 'Partner';
         e3.Action__c = 'message';
+        e3.Show_Toast__c = true;
         events.add(e3);
         
         Business_Event__e e4 = new Business_Event__e();
@@ -75,6 +79,7 @@ public class RC_BusinessEventController_Test {
         e4.Record_Field_Value__c = 'Ryan Cox';
         e4.Flow_API_Name__c = 'BE_View_Lead';
         e4.Flow_Button_Label__c = 'Assign Lead: Ryan Cox';
+        e4.Show_Toast__c = true;
         events.add(e4);
         
         List<Database.SaveResult> results = EventBus.publish(events);

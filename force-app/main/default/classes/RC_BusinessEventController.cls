@@ -117,7 +117,7 @@ public without sharing class RC_BusinessEventController {
         public String recordId {get;set;}
         
         @AuraEnabled
-        public String eventType {get;set;}
+        public String eventType {get;set;} 
     }
     
     // BusinessEventSeenByDetails - inner class
