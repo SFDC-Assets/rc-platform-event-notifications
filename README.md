@@ -6,6 +6,7 @@
 2. Displays notifications when Business Event platform events are received - in a toast pop-up message and as a list within the component.
 3. Past events can be replayed from the event channel.
 4. A history of events can be replayed from stored Business Event custom object records.
+5. Events can be marked as "seen" in the notification console and this "seen" action is stored with the Business Event custom object to see which users saw and marked the event and at what date/time. 
 
 ![Business Event Notification Console](docs/images/business-event-console.png)
 
