@@ -122,7 +122,8 @@
                 this.displayToastLink(component, notification.eventType, toastMessage, linkInfo);
             } else if (notification.action == 'record_link') {
                 var linkInfo = [];
-                linkInfo.push({'label': notification.recordFieldValue, 'url': '/' + notification.recordId});
+                var label = notification.recordFieldLabel + ': ' + notification.recordFieldValue;
+                linkInfo.push({'label': label, 'url': '/' + notification.recordId});
                 this.displayToastLink(component, notification.eventType, toastMessage, linkInfo);
             } 
         }
