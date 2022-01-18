@@ -109,6 +109,7 @@
         notification.recordFieldValue = payload.Record_Field_Value__c;
         notification.flowApiName = payload.Flow_API_Name__c;
         notification.flowButtonLabel = payload.Flow_Button_Label__c;
+        notification.showFlowInModal = payload.Show_Flow_In_Modal__c;
         console.log(this.helperFile() + ' > onReceiveNotification - notification: ' + JSON.stringify(notification));
 
         // display notification in a toast, if indicated
@@ -125,7 +126,9 @@
                 var label = notification.recordFieldLabel + ': ' + notification.recordFieldValue;
                 linkInfo.push({'label': label, 'url': '/' + notification.recordId});
                 this.displayToastLink(component, notification.eventType, toastMessage, linkInfo);
-            } 
+            } else if (notification.action == 'flow') {
+                this.displayToast(component, notification.eventType, toastMessage);
+            }
         }
 
         // save notification in history

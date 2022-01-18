@@ -43,7 +43,7 @@
                 <componentInstanceProperties>
                     <name>width</name>
                     <type>decorator</type>
-                    <value>500</value>
+                    <value>700</value>
                 </componentInstanceProperties>
                 <componentName>RC_BusinessEvent_NotificationConsole</componentName>
                 <identifier>RC_BusinessEvent_NotificationConsole</identifier>

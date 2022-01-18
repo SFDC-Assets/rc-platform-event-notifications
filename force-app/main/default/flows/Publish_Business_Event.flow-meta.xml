@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Flow xmlns="http://soap.sforce.com/2006/04/metadata">
-    <apiVersion>53.0</apiVersion>
+    <apiVersion>52.0</apiVersion>
     <choices>
         <name>choice_action_flow</name>
         <choiceText>flow</choiceText>
@@ -174,6 +174,12 @@
             </value>
         </inputAssignments>
         <inputAssignments>
+            <field>Show_Flow_In_Modal__c</field>
+            <value>
+                <elementReference>event_Show_Flow_In_Modal</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
             <field>Show_Toast__c</field>
             <value>
                 <elementReference>event_Show_Toast</elementReference>
@@ -304,6 +310,7 @@
                     <stringValue>https://www.google.com/search?q=do+something</stringValue>
                 </value>
             </inputParameters>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
             <isRequired>true</isRequired>
             <storeOutputAutomatically>true</storeOutputAutomatically>
             <visibilityRule>
@@ -463,6 +470,24 @@
             <fieldText>Flow Button Label</fieldText>
             <fieldType>InputField</fieldType>
             <isRequired>false</isRequired>
+            <visibilityRule>
+                <conditionLogic>and</conditionLogic>
+                <conditions>
+                    <leftValueReference>event_Action</leftValueReference>
+                    <operator>EqualTo</operator>
+                    <rightValue>
+                        <elementReference>choice_action_flow</elementReference>
+                    </rightValue>
+                </conditions>
+            </visibilityRule>
+        </fields>
+        <fields>
+            <name>event_Show_Flow_In_Modal</name>
+            <dataType>Boolean</dataType>
+            <fieldText>Show Flow In Modal</fieldText>
+            <fieldType>InputField</fieldType>
+            <helpText>&lt;p&gt;Launch the flow in a modal, otherwise it will be launched inline&lt;/p&gt;</helpText>
+            <isRequired>true</isRequired>
             <visibilityRule>
                 <conditionLogic>and</conditionLogic>
                 <conditions>

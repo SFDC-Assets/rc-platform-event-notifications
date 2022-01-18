@@ -61,11 +61,13 @@
                     <aura:if isTrue="{!and(v.notification.origin != null, v.notification.origin != '')}">
                         <p>Origin: {!v.notification.origin}</p>
                     </aura:if>
+                    <!-- moved below the grid to give the flow the full width of the console component
                     <p><c:RC_FlowButton buttonLabel="{!v.notification.flowButtonLabel}" variant="BRAND" 
-                                        flowToLaunch="{!v.notification.flowApiName}" showFlowInModal="true"
+                                        flowToLaunch="{!v.notification.flowApiName}" showFlowInModal="{!v.notification.showFlowInModal}"
                                         recordId="{!v.notification.recordId}"
                                         />
                     </p>
+					-->
                 </aura:if>
                 
             </div>
@@ -98,7 +100,16 @@
                 
             </div>
             
-        </div>
+        </div> <!-- end grid -->
+        
+        <aura:if isTrue="{!v.notification.action == 'flow'}">
+            <p><c:RC_FlowButton buttonLabel="{!v.notification.flowButtonLabel}" variant="BRAND" 
+                                flowToLaunch="{!v.notification.flowApiName}" showFlowInModal="{!v.notification.showFlowInModal}"
+                                recordId="{!v.notification.recordId}"
+                                />
+            </p>
+        </aura:if>
+        
     </div>
         
 </aura:component>
